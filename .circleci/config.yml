@@ -38,4 +38,4 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       # run tests!
-      - run: mvn -s .circleci.settings.xml deploy
+      - run: mvn -s .circleci.settings.xml deploy -DAWS_DEFAULT_REGION=us-east-1
