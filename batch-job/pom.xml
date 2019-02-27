@@ -66,6 +66,17 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<distributionManagement>
+		<snapshotRepository>
+			<id>mminella-repository-snapshot</id>
+			<url>s3://mminella-repository/snapshot</url>
+		</snapshotRepository>
+		<repository>
+			<id>mminella-repository-release</id>
+			<url>s3://mminella-repository/release</url>
+		</repository>
+	</distributionManagement>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -73,14 +84,12 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<extensions>
+			<extension>
+				<groupId>com.gkatzioura.maven.cloud</groupId>
+				<artifactId>s3-storage-wagon</artifactId>
+				<version>1.0</version>
+			</extension>
+		</extensions>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-		</repository>
-	</repositories>
-
 </project>
