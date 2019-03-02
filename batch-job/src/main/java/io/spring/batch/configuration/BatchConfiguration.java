@@ -20,6 +20,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.cloud.task.configuration.EnableTask;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +35,7 @@ import org.springframework.context.annotation.Configuration;
 public class BatchConfiguration {
 
 	private JobBuilderFactory jobBuilderFactory;
+
 	private StepBuilderFactory stepBuilderFactory;
 
 	public BatchConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
@@ -45,6 +47,7 @@ public class BatchConfiguration {
 	public Job job() {
 		return this.jobBuilderFactory.get("job")
 				.start(step1())
+				.incrementer(new RunIdIncrementer())
 				.build();
 	}
 

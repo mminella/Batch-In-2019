@@ -69,11 +69,11 @@
 	<distributionManagement>
 		<snapshotRepository>
 			<id>mminella-repository-snapshot</id>
-			<url>s3://mminella-repository/snapshot</url>
+			<url>https://mymavenrepo.com/repo/Bg0Sq8GF0QdAoCR6Ahm2/</url>
 		</snapshotRepository>
 		<repository>
 			<id>mminella-repository-release</id>
-			<url>s3://mminella-repository/release</url>
+			<url>https://mymavenrepo.com/repo/Bg0Sq8GF0QdAoCR6Ahm2/</url>
 		</repository>
 	</distributionManagement>
 
