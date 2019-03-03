@@ -43,7 +43,7 @@ jobs:
       - run:
           command: |
             curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github" | tar -zx
-            mv cf /usr/local/bin
+            sudo mv cf /usr/local/bin
             curl 'https://mminella-data-flow-server.apps.pcfone.io/tasks/schedules/devnexus-schedule' -i -X DELETE
             cf login -a api.run.pcfone.io -u $CF_USERNAME -p $CF_PASSWORD
             cf delete devnexus-job
