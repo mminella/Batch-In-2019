@@ -51,5 +51,5 @@ jobs:
             echo $cf_username
             cf auth $cf_username $cf_password
             cf target -o pivot-mminella -s playground
-            cf delete devnexus-job
+            cf delete devnexus-job -f
             curl 'https://mminella-data-flow-server.apps.pcfone.io/tasks/schedules' -i -X POST -d 'scheduleName=devnexus-schedule&taskDefinitionName=devnexus-job&properties=scheduler.cron.expression%3D*%2F1%20*%20%3F%20*%20*'
