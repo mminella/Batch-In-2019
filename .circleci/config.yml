@@ -42,6 +42,10 @@ jobs:
 
       - run:
           command: |
+            wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+            echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+            sudo apt-get update
+            sudo apt-get install cf-cli
             curl 'https://mminella-data-flow-server.apps.pcfone.io/tasks/schedules/devnexus-schedule' -i -X DELETE
             cf login -a api.run.pcfone.io -u $CF_USERNAME -p $CF_PASSWORD
             cf delete devnexus-job
