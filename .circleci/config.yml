@@ -49,7 +49,7 @@ jobs:
             cf api https://api.run.pcfone.io
             echo $CF_USERNAME
             echo $cf_username
-            cf auth $CF_USERNAME $CF_PASSWORD
+            cf auth $cf_username $cf_password
             cf target -o pivot-mminella -s playground
             cf delete devnexus-job
             curl 'https://mminella-data-flow-server.apps.pcfone.io/tasks/schedules' -i -X POST -d 'scheduleName=devnexus-schedule&taskDefinitionName=devnexus-job&properties=scheduler.cron.expression%3D*%2F1%20*%20%3F%20*%20*'
