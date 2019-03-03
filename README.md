@@ -25,3 +25,12 @@ DELETE FROM TASK_EXECUTION;
 
 cron expression:
 */1 * ? * *
+
+
+
+            PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+            APP_BODY="uri=maven%3A%2F%2Fio.spring.batch%3Abatch-job%3A$PROJECT_VERSION"
+            curl 'https://mminella-data-flow-server.apps.pcfone.io/tasks/definitions/devnexus-job' -i -X DELETE
+            curl 'https://mminella-data-flow-server.apps.pcfone.io/apps/task/batch-job' -i -X DELETE
+            curl 'https://mminella-data-flow-server.apps.pcfone.io/apps/task/batch-job' -i -X POST -d $APP_BODY
+            curl 'https://mminella-data-flow-server.apps.pcfone.io/tasks/definitions' -i -X POST -d 'name=devnexus-job&definition=batch-job'
