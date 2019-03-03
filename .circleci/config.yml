@@ -42,9 +42,12 @@ jobs:
 
       - run:
           command: |
-            curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github" | tar -zx
-            sudo mv cf /usr/local/bin
+            curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
+            sudo dpkg -i cf-cli_amd64.deb
+            cf -v
             curl 'https://mminella-data-flow-server.apps.pcfone.io/tasks/schedules/devnexus-schedule' -i -X DELETE
-            cf login -a api.run.pcfone.io -u $CF_USERNAME -p $CF_PASSWORD
+            cf api https://api.run.pcfone.io
+            cf auth "$CF_USERNAME" "$CF_PASSWORD"
+            cf target -o pivot-mminella -s playground
             cf delete devnexus-job
             curl 'https://mminella-data-flow-server.apps.pcfone.io/tasks/schedules' -i -X POST -d 'scheduleName=devnexus-schedule&taskDefinitionName=devnexus-job&properties=scheduler.cron.expression%3D*%2F1%20*%20%3F%20*%20*'
