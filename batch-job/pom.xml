@@ -70,11 +70,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.batch</groupId>
-			<artifactId>spring-batch-test</artifactId>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
