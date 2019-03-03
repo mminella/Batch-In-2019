@@ -47,6 +47,7 @@ public class BatchConfiguration {
 	public Job job() {
 		return this.jobBuilderFactory.get("job")
 				.start(step1())
+				.next(step2())
 				.incrementer(new RunIdIncrementer())
 				.build();
 	}
@@ -56,6 +57,16 @@ public class BatchConfiguration {
 		return this.stepBuilderFactory.get("step1")
 				.tasklet((contribution, context) -> {
 					System.out.println(">> Tasklet was run");
+					return RepeatStatus.FINISHED;
+				})
+				.build();
+	}
+
+	@Bean
+	public Step step2() {
+		return this.stepBuilderFactory.get("step2")
+				.tasklet((contribution, context) -> {
+					System.out.println(">> Tasklet was run, again!");
 					return RepeatStatus.FINISHED;
 				})
 				.build();
