@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Map;
+
 import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.exporter.PushGateway;
 
@@ -33,6 +34,11 @@ import org.springframework.core.env.Environment;
  */
 @Configuration
 public class PrometheusConfiguration {
+
+//	@Bean
+//	public LoggingMeterRegistry loggingMeterRegistry() {
+//		return new LoggingMeterRegistry();
+//	}
 
 	@Bean
 	public PrometheusPushGatewayManager prometheusPushGatewayManager(
