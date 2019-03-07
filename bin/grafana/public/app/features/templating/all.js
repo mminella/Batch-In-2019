@@ -1,0 +1,4 @@
+/*! grafana - v4.3.2 - 2017-05-31
+ * Copyright (c) 2017 Torkel Ödegaard; Licensed Apache-2.0 */
+
+System.register(["./templateSrv","./editor_ctrl","./variable_srv","./interval_variable","./query_variable","./datasource_variable","./custom_variable","./constant_variable","./adhoc_variable"],function(a,b){"use strict";var c,d,e,f,g,h,i;b&&b.id;return{setters:[function(a){},function(a){},function(a){c=a},function(a){d=a},function(a){e=a},function(a){f=a},function(a){g=a},function(a){h=a},function(a){i=a}],execute:function(){a("VariableSrv",c.VariableSrv),a("IntervalVariable",d.IntervalVariable),a("QueryVariable",e.QueryVariable),a("DatasourceVariable",f.DatasourceVariable),a("CustomVariable",g.CustomVariable),a("ConstantVariable",h.ConstantVariable),a("AdhocVariable",i.AdhocVariable)}}});

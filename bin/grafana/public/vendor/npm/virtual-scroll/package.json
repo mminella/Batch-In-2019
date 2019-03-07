@@ -1,0 +1,35 @@
+{
+  "name": "virtual-scroll",
+  "version": "1.1.1",
+  "description": "Smooth fake scroll using CSS transform",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/prova ./test/**/*.js -b -l phantom -q",
+    "test-browser": "./node_modules/.bin/prova ./test/**/*.js -b -l chrome -q"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ayamflow/virtual-scroll"
+  },
+  "keywords": [
+    "virtual",
+    "scroll",
+    "smooth"
+  ],
+  "author": "= <=>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ayamflow/virtual-scroll/issues"
+  },
+  "homepage": "https://github.com/ayamflow/virtual-scroll",
+  "dependencies": {
+    "bindall-standalone": "^1.0.5",
+    "lethargy": "^1.0.2",
+    "object-assign": "^4.0.1",
+    "tiny-emitter": "^1.0.0"
+  },
+  "devDependencies": {
+    "prova": "^2.1.2",
+    "tiny-trigger": "scottcorgan/tiny-trigger"
+  }
+}

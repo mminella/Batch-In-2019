@@ -34,3 +34,7 @@ cron expression:
             curl 'https://mminella-data-flow-server.apps.pcfone.io/apps/task/batch-job' -i -X DELETE
             curl 'https://mminella-data-flow-server.apps.pcfone.io/apps/task/batch-job' -i -X POST -d $APP_BODY
             curl 'https://mminella-data-flow-server.apps.pcfone.io/tasks/definitions' -i -X POST -d 'name=devnexus-job&definition=batch-job'
+
+
+
+Grafana default auth: admin/admin

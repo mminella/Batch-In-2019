@@ -32,4 +32,4 @@ scrape_configs:
 
     honor_labels: true
     static_configs:
-    - targets: ['pushgateway.apps.pcfone.io']
+    - targets: ['mminella-pushgateway.apps.pcfone.io']

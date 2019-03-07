@@ -1,0 +1,4 @@
+/*! grafana - v4.3.2 - 2017-05-31
+ * Copyright (c) 2017 Torkel Ödegaard; Licensed Apache-2.0 */
+
+System.register(["moment","app/core/utils/datemath"],function(a,b){"use strict";function c(){return{restrict:"A",require:"ngModel",link:function(a,b,c,f){var g="YYYY-MM-DD HH:mm:ss",h=function(b){if(b.indexOf("now")!==-1)return e.isValid(b)?(f.$setValidity("error",!0),b):void f.$setValidity("error",!1);var c;return c=a.ctrl.isUtc?d.default.utc(b,g):d.default(b,g),c.isValid()?(f.$setValidity("error",!0),c):void f.$setValidity("error",!1)},i=function(a){return d.default.isMoment(a)?a.format(g):a};f.$parsers.push(h),f.$formatters.push(i)}}}b&&b.id;a("inputDateDirective",c);var d,e;return{setters:[function(a){d=a},function(a){e=a}],execute:function(){}}});

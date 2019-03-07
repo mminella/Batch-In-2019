@@ -1,0 +1,4 @@
+/*! grafana - v4.3.2 - 2017-05-31
+ * Copyright (c) 2017 Torkel Ödegaard; Licensed Apache-2.0 */
+
+System.register(["../../core_module"],function(a,b){"use strict";function c(){return{restrict:"E",templateUrl:"public/app/core/components/navbar/navbar.html",controller:e,bindToController:!0,transclude:!0,controllerAs:"ctrl",scope:{title:"@",titleUrl:"@",iconUrl:"@"},link:function(a,b,c,d){d.icon=c.icon,b.addClass("navbar")}}}b&&b.id;a("navbarDirective",c);var d,e;return{setters:[function(a){d=a}],execute:function(){e=function(){function a(a,b){this.$scope=a,this.contextSrv=b}return a.$inject=["$scope","contextSrv"],a}(),a("NavbarCtrl",e),d.default.directive("navbar",c)}}});
