@@ -20,7 +20,6 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.configuration.metrics.EnableBatchMetrics;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.cloud.task.configuration.EnableTask;
@@ -32,7 +31,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @EnableTask
 @EnableBatchProcessing
-@EnableBatchMetrics
 @Configuration
 public class BatchConfiguration {
 
