@@ -70,7 +70,7 @@ public class BatchConfiguration {
 	@Bean
 	public Step step2() {
 		return this.stepBuilderFactory.get("step2")
-				.<Integer, String>chunk(10)
+				.<Integer, Integer>chunk(10)
 				.reader(new ListItemReader<>(IntStream.rangeClosed(0, 1000)
 						.boxed().collect(Collectors.toList())))
 				.writer(list -> list.stream().forEach(System.out::println)).build();

@@ -1,9 +1,5 @@
-///<reference path="../../headers/common.d.ts" />
-
-import _ from 'lodash';
 import kbn from 'app/core/utils/kbn';
-import {Variable, containsVariable, assignModelProperties, variableTypes} from './variable';
-import {VariableSrv} from './variable_srv';
+import { Variable, containsVariable, assignModelProperties, variableTypes } from './variable';
 
 export class DatasourceVariable implements Variable {
   regex: any;
@@ -11,8 +7,9 @@ export class DatasourceVariable implements Variable {
   options: any;
   current: any;
   refresh: any;
+  skipUrlSync: boolean;
 
- defaults = {
+  defaults = {
     type: 'datasource',
     name: '',
     hide: 0,
@@ -22,9 +19,10 @@ export class DatasourceVariable implements Variable {
     options: [],
     query: '',
     refresh: 1,
+    skipUrlSync: false,
   };
 
-  /** @ngInject **/
+  /** @ngInject */
   constructor(private model, private datasourceSrv, private variableSrv, private templateSrv) {
     assignModelProperties(this, model, this.defaults);
     this.refresh = 1;
@@ -33,7 +31,7 @@ export class DatasourceVariable implements Variable {
   getSaveModel() {
     assignModelProperties(this.model, this, this.defaults);
 
-    // dont persist options
+    // don't persist options
     this.model.options = [];
     return this.model;
   }
@@ -43,17 +41,17 @@ export class DatasourceVariable implements Variable {
   }
 
   updateOptions() {
-    var options = [];
-    var sources = this.datasourceSrv.getMetricSources({skipVariables: true});
-    var regex;
+    const options = [];
+    const sources = this.datasourceSrv.getMetricSources({ skipVariables: true });
+    let regex;
 
     if (this.regex) {
       regex = this.templateSrv.replace(this.regex, null, 'regex');
       regex = kbn.stringToJsRegex(regex);
     }
 
-    for (var i = 0; i < sources.length; i++) {
-      var source = sources[i];
+    for (let i = 0; i < sources.length; i++) {
+      const source = sources[i];
       // must match on type
       if (source.meta.id !== this.query) {
         continue;
@@ -63,11 +61,11 @@ export class DatasourceVariable implements Variable {
         continue;
       }
 
-      options.push({text: source.name, value: source.name});
+      options.push({ text: source.name, value: source.name });
     }
 
     if (options.length === 0) {
-      options.push({text: 'No data sources found', value: ''});
+      options.push({ text: 'No data sources found', value: '' });
     }
 
     this.options = options;

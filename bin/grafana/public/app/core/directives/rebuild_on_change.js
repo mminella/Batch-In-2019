@@ -1,4 +1,0 @@
-/*! grafana - v4.3.2 - 2017-05-31
- * Copyright (c) 2017 Torkel Ödegaard; Licensed Apache-2.0 */
-
-System.register(["jquery","../core_module"],function(a,b){"use strict";function c(a){for(var b,c=a[0],d=a[a.length-1],f=1;c!==d&&(c=c.nextSibling);f++)(b||a[f]!==c)&&(b||(b=e.default([].slice.call(a,0,f))),b.push(c));return b||a}function d(a){return{multiElement:!0,terminal:!0,transclude:!0,priority:600,restrict:"E",link:function(b,d,e,f,g){function h(){k&&(k.remove(),k=null),j&&(j.$destroy(),j=null),i&&(k=c(i.clone),a.leave(k).then(function(){k=null}),i=null)}var i,j,k;b.$watch(e.property,function(b,c){j&&b!==c&&h(),j||!b&&!e.showNull?h():g(function(b,c){j=c,b[b.length++]=document.createComment(" end rebuild on change "),i={clone:b},a.enter(b,d.parent(),d)})})}}}d.$inject=["$animate"];var e,f;b&&b.id;return{setters:[function(a){e=a},function(a){f=a}],execute:function(){f.default.directive("rebuildOnChange",d)}}});

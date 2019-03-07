@@ -1,4 +1,0 @@
-/*! grafana - v4.3.2 - 2017-05-31
- * Copyright (c) 2017 Torkel Ödegaard; Licensed Apache-2.0 */
-
-System.register(["app/core/core"],function(a,b){"use strict";function c(){return{restrict:"E",templateUrl:"public/app/features/dashboard/row/options.html",controller:e,bindToController:!0,controllerAs:"ctrl",scope:{rowCtrl:"="}}}b&&b.id;a("rowOptionsDirective",c);var d,e;return{setters:[function(a){d=a}],execute:function(){e=function(){function a(a,b,c){this.$scope=a,this.$timeout=b,this.$rootScope=c,this.fontSizes=["h1","h2","h3","h4","h5","h6"],this.row=this.rowCtrl.row,this.dashboard=this.rowCtrl.dashboard,this.row.titleSize=this.row.titleSize||"h6"}return a.$inject=["$scope","$timeout","$rootScope"],a}(),a("RowOptionsCtrl",e),d.coreModule.directive("dashRowOptions",c)}}});
