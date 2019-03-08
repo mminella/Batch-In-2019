@@ -15,6 +15,7 @@
  */
 package io.spring.batch.configuration;
 
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -42,6 +43,8 @@ public class BatchConfiguration {
 
 	private StepBuilderFactory stepBuilderFactory;
 
+	private Random random = new Random();
+
 	public BatchConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
 		this.jobBuilderFactory = jobBuilderFactory;
 		this.stepBuilderFactory = stepBuilderFactory;
@@ -61,7 +64,7 @@ public class BatchConfiguration {
 		return this.stepBuilderFactory.get("step1")
 				.tasklet((contribution, context) -> {
 					System.out.println(">> Tasklet was run");
-					Thread.sleep(5000l);
+					Thread.sleep(random.nextInt(10000));
 					return RepeatStatus.FINISHED;
 				})
 				.build();
