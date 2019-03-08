@@ -26,6 +26,7 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.support.ListItemReader;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.cloud.task.configuration.EnableTask;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -59,10 +60,19 @@ public class BatchConfiguration {
 
 	@Bean
 	public Step step1() {
-		return this.stepBuilderFactory.get("step2")
+		return this.stepBuilderFactory.get("step1")
 				.<Integer, Integer>chunk(10)
 				.reader(new ListItemReader<>(IntStream.rangeClosed(0, random.nextInt(10000))
 						.boxed().collect(Collectors.toList())))
-				.writer(list -> list.stream().forEach(System.out::println)).build();
+				.writer(list -> list.forEach(System.out::println)).build();
+	}
+
+	@Bean
+	public Step step2() {
+		return this.stepBuilderFactory.get("step2")
+				.tasklet((contribution, context) -> {
+					Thread.sleep(this.random.nextInt(10000));
+					return RepeatStatus.FINISHED;
+				}).build();
 	}
 }
