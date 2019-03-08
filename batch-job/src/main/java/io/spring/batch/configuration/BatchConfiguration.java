@@ -56,12 +56,12 @@ public class BatchConfiguration {
 				.incrementer(new RunIdIncrementer())
 				.build();
 	}
-	
+
 	@Bean
 	public Step step1() {
 		return this.stepBuilderFactory.get("step2")
 				.<Integer, Integer>chunk(10)
-				.reader(new ListItemReader<>(IntStream.rangeClosed(0, 1000)
+				.reader(new ListItemReader<>(IntStream.rangeClosed(0, random.nextInt(10000))
 						.boxed().collect(Collectors.toList())))
 				.writer(list -> list.stream().forEach(System.out::println)).build();
 	}
