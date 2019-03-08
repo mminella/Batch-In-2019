@@ -54,6 +54,7 @@ public class BatchConfiguration {
 	public Job job() {
 		return this.jobBuilderFactory.get("job")
 				.start(step1())
+				.next(step2())
 				.incrementer(new RunIdIncrementer())
 				.build();
 	}
