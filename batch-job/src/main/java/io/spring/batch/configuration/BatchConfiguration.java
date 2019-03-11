@@ -63,7 +63,7 @@ public class BatchConfiguration {
 	public Step step1() {
 		return this.stepBuilderFactory.get("step1")
 				.<Integer, Integer>chunk(10)
-				.reader(new ListItemReader<>(IntStream.rangeClosed(0, random.nextInt(10000))
+				.reader(new ListItemReader<>(IntStream.rangeClosed(0, 1000)
 						.boxed().collect(Collectors.toList())))
 				.writer(list -> list.forEach(System.out::println)).build();
 	}
