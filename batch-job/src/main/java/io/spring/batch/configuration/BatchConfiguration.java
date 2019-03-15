@@ -63,17 +63,17 @@ public class BatchConfiguration {
 	public Step step1() {
 		return this.stepBuilderFactory.get("step1")
 				.<Integer, Integer>chunk(10)
-				.reader(new ListItemReader<>(IntStream.rangeClosed(0, 1000)
+				.reader(new ListItemReader<>(IntStream.rangeClosed(0, this.random.nextInt(10000))
 						.boxed().collect(Collectors.toList())))
 				.writer(list -> list.forEach(System.out::println)).build();
 	}
 
-	@Bean
-	public Step step2() {
-		return this.stepBuilderFactory.get("step2")
-				.tasklet((contribution, context) -> {
-					Thread.sleep(this.random.nextInt(10000));
-					return RepeatStatus.FINISHED;
-				}).build();
-	}
+//	@Bean
+//	public Step step2() {
+//		return this.stepBuilderFactory.get("step2")
+//				.tasklet((contribution, context) -> {
+//					Thread.sleep(this.random.nextInt(10000));
+//					return RepeatStatus.FINISHED;
+//				}).build();
+//	}
 }
