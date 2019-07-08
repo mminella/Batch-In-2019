@@ -25,7 +25,13 @@ The repository for my talk titled the same
     URI: maven://io.spring.batch:batch-job:jar:0.0.1-SNAPSHOT
     ```
 1. Create Task
+    ```
+    chicago-job
+    ```
 1. Schedule Task
+    ```
+    chicago-schedule
+    ```
 
     
 # DB Cleanup
