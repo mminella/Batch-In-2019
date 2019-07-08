@@ -3,12 +3,31 @@
 # Batch-In-2019
 The repository for my talk titled the same
 
-## TODO:
+# Running the demo:
 
+1. Delete apps if needed
+    ```
+    cf delete mminella-grafana
+    cf delete mminella-pushgateway
+    cf delete mminella-prometheus
+    cf delete mminella-data-flow-server
+    cf delete mminella-skipper-server
+    ```
+1. Push apps
+    ```
+    cd bin
+    cf push -f server.yml
+    ```
+1. Register task application
+    ```
+    Name: s1t-chicago-job
+    Type: Task
+    URI: maven://io.spring.batch:batch-job:jar:0.0.1-SNAPSHOT
+    ```
+1. Create Task
+1. Schedule Task
 
-
-
-
+    
 # DB Cleanup
 ```
 DELETE FROM BATCH_STEP_EXECUTION_CONTEXT;
