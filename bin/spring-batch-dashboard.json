@@ -188,7 +188,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "process_start_time_seconds*1000",
+          "expr": "process_start_time_seconds{appname=\"springbatch\"}*1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
@@ -1462,7 +1462,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(spring_batch_item_write_seconds_count[1m])",
+          "expr": "rate(spring_batch_chunk_write_seconds_count[1m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
