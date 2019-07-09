@@ -31,3 +31,4 @@ spring-*/src/main/java/META-INF/MANIFEST.MF
 *.iws
 .idea/*
 bin/server.yml.sample
+~$Deck.pptx
