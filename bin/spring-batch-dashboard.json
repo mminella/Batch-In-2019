@@ -1118,7 +1118,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(spring_batch_job_seconds_count[1m]) * 60",
+          "expr": "spring_batch_job_seconds_count",
           "format": "time_series",
           "hide": false,
           "interval": "",
