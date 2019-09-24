@@ -44,25 +44,25 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class BatchConfiguration extends DefaultBatchConfigurer {
 
-	private final JobBuilderFactory jobs;
+	private final JobBuilderFactory jobBuilderFactory;
 
-	private final StepBuilderFactory steps;
+	private final StepBuilderFactory stepBuilderFactory;
 
 	private final EntityManagerFactory entityManagerFactory;
 
 	private final JdbcTemplate jdbcTemplate;
 
 	public BatchConfiguration(EntityManagerFactory entityManagerFactory, JdbcTemplate jdbcTemplate,
-							JobBuilderFactory jobs, StepBuilderFactory steps) {
+							  JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
 		this.entityManagerFactory = entityManagerFactory;
 		this.jdbcTemplate = jdbcTemplate;
-		this.jobs = jobs;
-		this.steps = steps;
+		this.jobBuilderFactory = jobBuilderFactory;
+		this.stepBuilderFactory = stepBuilderFactory;
 	}
 
 	@Bean
 	public Job job() {
-		return jobs.get("job")
+		return jobBuilderFactory.get("job")
 				.start(step1())
 				.next(step2())
 				.incrementer(new RunIdIncrementer())
@@ -71,7 +71,7 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
 
 	@Bean
 	public Step step1() {
-		return steps.get("step1")
+		return stepBuilderFactory.get("step1")
 				.<Person, Person>chunk(1000)
 				.reader(itemReader())
 				.writer(itemWriter())
@@ -97,7 +97,7 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
 
 	@Bean
 	public Step step2() {
-		return steps.get("step2")
+		return stepBuilderFactory.get("step2")
 				.tasklet((stepContribution, chunkContext) ->  {
 					String countQuery = "select count(id) from person";
 					Integer nbPersonsPersisted = this.jdbcTemplate.queryForObject(countQuery, Integer.class);
