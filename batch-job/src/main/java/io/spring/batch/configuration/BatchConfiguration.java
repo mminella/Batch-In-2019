@@ -27,6 +27,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.support.ListItemReader;
 import org.springframework.batch.repeat.RepeatStatus;
@@ -64,6 +65,7 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
 		return jobs.get("job")
 				.start(step1())
 				.next(step2())
+				.incrementer(new RunIdIncrementer())
 				.build();
 	}
 
@@ -109,4 +111,5 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
 	public PlatformTransactionManager getTransactionManager() {
 		return new JpaTransactionManager(this.entityManagerFactory);
 	}
+
 }
