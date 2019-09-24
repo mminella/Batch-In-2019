@@ -62,7 +62,7 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
 
 	@Bean
 	public Job job() {
-		return jobBuilderFactory.get("job")
+		return this.jobBuilderFactory.get("job")
 				.start(step1())
 				.next(step2())
 				.incrementer(new RunIdIncrementer())
@@ -71,7 +71,7 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
 
 	@Bean
 	public Step step1() {
-		return stepBuilderFactory.get("step1")
+		return this.stepBuilderFactory.get("step1")
 				.<Person, Person>chunk(1000)
 				.reader(itemReader())
 				.writer(itemWriter())
@@ -97,7 +97,7 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
 
 	@Bean
 	public Step step2() {
-		return stepBuilderFactory.get("step2")
+		return this.stepBuilderFactory.get("step2")
 				.tasklet((stepContribution, chunkContext) ->  {
 					String countQuery = "select count(id) from person";
 					Integer nbPersonsPersisted = this.jdbcTemplate.queryForObject(countQuery, Integer.class);
