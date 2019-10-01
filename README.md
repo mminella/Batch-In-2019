@@ -22,7 +22,7 @@ The repository for my talk titled the same
     ```
     Name: s1t-chicago-job
     Type: Task
-    URI: maven://io.spring.batch:batch-job:jar:0.0.1-SNAPSHOT
+    URI: maven://com.github.mminella.Batch-in-2019:batch-job:s1p-SNAPSHOT
     ```
 1. Create Task
     ```
