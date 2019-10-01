@@ -102,8 +102,8 @@
 
 	<repositories>
 		<repository>
-			<id>snapshots</id>
-			<url>https://mymavenrepo.com/repo/X1dV1RXvqIQ37DanLXti/</url>
+			<id>spring-snapshots</id>
+			<url>https://repo.spring.io/libs-snapshot</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
