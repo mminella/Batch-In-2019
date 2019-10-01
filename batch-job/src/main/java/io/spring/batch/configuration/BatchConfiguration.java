@@ -17,7 +17,6 @@ package io.spring.batch.configuration;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManagerFactory;
 
 import io.spring.batch.Person;

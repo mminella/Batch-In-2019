@@ -28,8 +28,16 @@ scrape_configs:
     static_configs:
     - targets: ['localhost:8080']
 
-  - job_name: 'springbatch'
-
+  - job_name: 'proxy'
+    scrape_interval: 10s
+    scrape_timeout: 9s
+    metrics_path: '/metrics/proxy'
     honor_labels: true
     static_configs:
-    - targets: ['mminella-pushgateway.apps.pcfone.io']
+    - targets: ['mminella-prometheus-proxy.apps.pcfone.io']
+  - job_name: 'springbatch'
+    scrape_interval: 10s
+    scrape_timeout: 9s
+    metrics_path: '/metrics/connected'
+    static_configs:
+      - targets: ['mminella-prometheus-proxy.apps.pcfone.io']
