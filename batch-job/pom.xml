@@ -56,11 +56,14 @@
 			<artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>io.micrometer.prometheus</groupId>
-			<artifactId>prometheus-rsocket-client</artifactId>
+			<artifactId>prometheus-rsocket-spring</artifactId>
 			<version>0.9.0-SNAPSHOT</version>
 		</dependency>
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
