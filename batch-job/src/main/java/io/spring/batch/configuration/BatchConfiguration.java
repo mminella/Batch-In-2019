@@ -71,7 +71,7 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
 	@Bean
 	public Step step1() {
 		return this.stepBuilderFactory.get("step1")
-				.<Person, Person>chunk(1000)
+				.<Person, Person>chunk(10)
 				.reader(itemReader())
 				.writer(itemWriter())
 				.build();
@@ -80,7 +80,7 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
 	@Bean
 	public ListItemReader<Person> itemReader() {
 		List<Person> items = new ArrayList<>();
-		for (int i = 0; i < 1_000_000; i++) {
+		for (int i = 0; i < 1_000; i++) {
 			items.add(new Person("foo" + i));
 		}
 		return new ListItemReader<>(items);
