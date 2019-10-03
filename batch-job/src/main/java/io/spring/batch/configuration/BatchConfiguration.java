@@ -90,7 +90,7 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
 	public JpaItemWriter<Person> itemWriter() {
 		JpaItemWriter<Person> writer = new JpaItemWriter<>();
 		writer.setEntityManagerFactory(this.entityManagerFactory);
-//		writer.setUsePersist(true);
+		writer.setUsePersist(true);
 		return writer;
 	}
 
