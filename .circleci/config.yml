@@ -21,35 +21,27 @@ jobs:
       MAVEN_OPTS: -Xmx3200m
 
     steps:
-      - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v3-dependencies-{{ checksum "pom.xml" }}
-            # fallback to using the latest cache if no exact match is found
-            - v3-dependencies-
-
-      - run: mvn dependency:go-offline
-
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v3-dependencies-{{ checksum "pom.xml" }}
-
-      # run tests!
-      - run: mvn -s .circleci.settings.xml deploy -DAWS_DEFAULT_REGION=us-east-1
+#      - checkout
+#
+#      # Download and cache dependencies
+#      - restore_cache:
+#          keys:
+#            - v3-dependencies-{{ checksum "pom.xml" }}
+#            # fallback to using the latest cache if no exact match is found
+#            - v3-dependencies-
+#
+#      - run: mvn dependency:go-offline
+#
+#      - save_cache:
+#          paths:
+#            - ~/.m2
+#          key: v3-dependencies-{{ checksum "pom.xml" }}
+#
+#      # run tests!
+#      - run: mvn -s .circleci.settings.xml deploy -DAWS_DEFAULT_REGION=us-east-1
 
       - run:
           command: |
-            curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-            sudo dpkg -i cf-cli_amd64.deb
-            cf -v
-            curl 'https://mminella-data-flow-server.apps.pcfone.io/tasks/schedules/chicago-schedule' -i -X DELETE
-            cf api https://api.run.pcfone.io
-            echo $CF_USERNAME
-            echo $cf_username
-            cf auth $cf_username $cf_password
-            cf target -o pivot-mminella -s playground
-            cf delete chicago-job -f
-            curl 'https://mminella-data-flow-server.apps.pcfone.io/tasks/schedules' -i -X POST -d 'scheduleName=chicago-schedule&taskDefinitionName=chicago-job&properties=scheduler.cron.expression%3D*%2F1%20*%20%3F%20*%20*'
+            HASH="$(git rev-parse HEAD)"
+            curl "https://mminella-data-flow-server.apps.pcfone.io/apps/task/s1t-chicago-job/$HASH" -i -X POST -d "uri=maven%3A%2F%2Fcom.github.mminella.Batch-in-2019%3Abatch-job%3A$HASH"
+            curl "https://mminella-data-flow-server.apps.pcfone.io/apps/task/s1t-chicago-job/$HASH" -i -X PUT -H 'Accept: application/json'
