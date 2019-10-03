@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/mminella/Batch-In-2019/tree/master.svg?style=svg)](https://circleci.com/gh/mminella/Batch-In-2019/tree/master)
+[![CircleCI](https://circleci.com/gh/mminella/Batch-In-2019/tree/s1p.svg?style=svg)](https://circleci.com/gh/mminella/Batch-In-2019/tree/s1p)
 
 # Batch-In-2019
 The repository for my talk titled the same
