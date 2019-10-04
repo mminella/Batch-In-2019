@@ -24,6 +24,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.support.ListItemReader;
 import org.springframework.batch.repeat.RepeatStatus;
@@ -52,6 +53,7 @@ public class BatchConfiguration {
 		return jobBuilderFactory.get("job")
 				.start(step1())
 				.next(step2())
+				.incrementer(new RunIdIncrementer())
 				.build();
 	}
 
