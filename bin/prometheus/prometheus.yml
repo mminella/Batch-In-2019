@@ -30,14 +30,14 @@ scrape_configs:
 
   - job_name: 'proxy'
     scrape_interval: 5s
-    scrape_timeout: 9s
+    scrape_timeout: 4s
     metrics_path: '/metrics/proxy'
     honor_labels: true
     static_configs:
     - targets: ['mminella-prometheus-proxy.apps.pcfone.io']
   - job_name: 'springbatch'
     scrape_interval: 5s
-    scrape_timeout: 9s
+    scrape_timeout: 4s
     metrics_path: '/metrics/connected'
     static_configs:
       - targets: ['mminella-prometheus-proxy.apps.pcfone.io']
