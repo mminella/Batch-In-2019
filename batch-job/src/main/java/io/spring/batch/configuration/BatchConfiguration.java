@@ -15,100 +15,89 @@
  */
 package io.spring.batch.configuration;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import javax.persistence.EntityManagerFactory;
-
-import io.spring.batch.Person;
+import java.util.Random;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.item.database.JpaItemWriter;
+import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.support.ListItemReader;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
 
 /**
  * @author Michael Minella
  * @author Mahmoud Ben Hassine
  */
 @Configuration
-public class BatchConfiguration extends DefaultBatchConfigurer {
+public class BatchConfiguration {
 
-	private final JobBuilderFactory jobBuilderFactory;
+	private Random random;
+	private JobBuilderFactory jobBuilderFactory;
+	private StepBuilderFactory stepBuilderFactory;
 
-	private final StepBuilderFactory stepBuilderFactory;
-
-	private final EntityManagerFactory entityManagerFactory;
-
-	private final JdbcTemplate jdbcTemplate;
-
-	public BatchConfiguration(EntityManagerFactory entityManagerFactory, JdbcTemplate jdbcTemplate,
-							  JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
-		this.entityManagerFactory = entityManagerFactory;
-		this.jdbcTemplate = jdbcTemplate;
+	public BatchConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
 		this.jobBuilderFactory = jobBuilderFactory;
 		this.stepBuilderFactory = stepBuilderFactory;
+		this.random = new Random();
 	}
 
 	@Bean
 	public Job job() {
-		return this.jobBuilderFactory.get("job")
+		return jobBuilderFactory.get("job")
 				.start(step1())
 				.next(step2())
-				.incrementer(new RunIdIncrementer())
 				.build();
 	}
 
 	@Bean
 	public Step step1() {
-		return this.stepBuilderFactory.get("step1")
-				.<Person, Person>chunk(10)
+		return stepBuilderFactory.get("step1")
+				.tasklet((contribution, chunkContext) -> {
+					System.out.println("hello world");
+					return RepeatStatus.FINISHED;
+				})
+				.build();
+	}
+
+	@Bean
+	public Step step2() {
+		return stepBuilderFactory.get("step2")
+				.<Integer, Integer>chunk(3)
 				.reader(itemReader())
 				.writer(itemWriter())
 				.build();
 	}
 
 	@Bean
-	public ListItemReader<Person> itemReader() {
-		List<Person> items = new ArrayList<>();
-		for (int i = 0; i < 1_000; i++) {
-			items.add(new Person("foo" + i));
+	@StepScope
+	public ListItemReader<Integer> itemReader() {
+		List<Integer> items = new LinkedList<>();
+		// read a random number of items in each run
+		for (int i = 0; i < random.nextInt(100); i++) {
+			items.add(i);
 		}
 		return new ListItemReader<>(items);
 	}
 
 	@Bean
-	public JpaItemWriter<Person> itemWriter() {
-		JpaItemWriter<Person> writer = new JpaItemWriter<>();
-		writer.setEntityManagerFactory(this.entityManagerFactory);
-		writer.setUsePersist(true);
-		return writer;
-	}
-
-	@Bean
-	public Step step2() {
-		return this.stepBuilderFactory.get("step2")
-				.tasklet((stepContribution, chunkContext) ->  {
-					String countQuery = "select count(id) from person";
-					Integer nbPersonsPersisted = this.jdbcTemplate.queryForObject(countQuery, Integer.class);
-					System.out.println(String.format("%s persons have been persisted", nbPersonsPersisted));
-					return RepeatStatus.FINISHED;
-				})
-				.build();
-	}
-
-	@Override
-	public PlatformTransactionManager getTransactionManager() {
-		return new JpaTransactionManager(this.entityManagerFactory);
+	public ItemWriter<Integer> itemWriter() {
+		return items -> {
+			for (Integer item : items) {
+				int nextInt = random.nextInt(1000);
+				Thread.sleep(nextInt);
+				// simulate write failure
+				if (nextInt % 57 == 0) {
+					throw new Exception("Boom!");
+				}
+				System.out.println("item = " + item);
+			}
+		};
 	}
 
 }
