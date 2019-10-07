@@ -19,22 +19,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.StepContribution;
-import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.core.listener.StepExecutionListenerSupport;
-import org.springframework.batch.core.scope.context.ChunkContext;
-import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.support.ListItemReader;
-import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -59,42 +52,19 @@ public class JobConfiguration {
 	@Bean
 	public Job job() {
 		return jobBuilderFactory.get("job")
-				.start(step1())
-				.next(step2())
+				.start(step())
 				.incrementer(new RunIdIncrementer())
 				.build();
 	}
 
 	@Bean
-	public Step step1() {
-		return stepBuilderFactory.get("step1")
+	public Step step() {
+		return stepBuilderFactory.get("step")
 				.<Integer, Integer>chunk(3)
 				.reader(itemReader())
 				.writer(itemWriter())
-				.listener(new StepExecutionListenerSupport() {
-					@Override
-					public ExitStatus afterStep(StepExecution stepExecution) {
-						stepExecution.getJobExecution().getExecutionContext().putInt("readCount",stepExecution.getReadCount());
-						return super.afterStep(stepExecution);
-					}
-				})
 				.build();
 	}
-
-	@Bean
-	public Step step2() {
-		return stepBuilderFactory.get("step2")
-				.tasklet(new Tasklet() {
-					@Override
-					public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-						Object readCount = chunkContext.getStepContext().getStepExecution().getJobExecution().getExecutionContext().get("readCount");
-						System.out.println("readCount = " + readCount);
-						return RepeatStatus.FINISHED;
-					}
-				})
-				.build();
-	}
-
 
 	@Bean
 	@StepScope
