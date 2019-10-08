@@ -63,7 +63,7 @@ public class JobConfiguration {
 	}
 
 	@Bean
-	private Step step2() {
+	public Step step2() {
 		return this.stepBuilderFactory.get("step2")
 				.tasklet(new Tasklet() {
 					@Override
@@ -71,7 +71,7 @@ public class JobConfiguration {
 						System.out.println("STEP 2 RAN!!!");
 						return RepeatStatus.FINISHED;
 					}
-				})
+				}).build();
 	}
 
 	@Bean
