@@ -43,5 +43,5 @@ jobs:
       - run:
           command: |
             HASH="$(git rev-parse HEAD)"
-            curl "https://mminella-data-flow-server.apps.pcfone.io/apps/task/s1t-chicago-job/$HASH" -i -X POST -d "uri=maven%3A%2F%2Fcom.github.mminella.Batch-in-2019%3Abatch-job%3A$HASH"
-            curl "https://mminella-data-flow-server.apps.pcfone.io/apps/task/s1t-chicago-job/$HASH" -i -X PUT -H 'Accept: application/json'
+            curl "https://mminella-data-flow-server.apps.pcfone.io/apps/task/s1p-austin-job/$HASH" -i -X POST -d "uri=maven%3A%2F%2Fcom.github.mminella.Batch-in-2019%3Abatch-job%3A$HASH"
+            curl "https://mminella-data-flow-server.apps.pcfone.io/apps/task/s1p-austin-job/$HASH" -i -X PUT -H 'Accept: application/json'
