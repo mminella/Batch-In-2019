@@ -20,17 +20,17 @@ The repository for my talk titled the same
     ```
 1. Register task application
     ```
-    Name: s1t-chicago-job
+    Name: deloit-job
     Type: Task
-    URI: maven://com.github.mminella.Batch-in-2019:batch-job:s1p-SNAPSHOT
+    URI: maven://com.github.mminella.Batch-in-2019:batch-job:7e8e45f7a78f6ee16bfb9fb350b1c74b2bb01b82
     ```
 1. Create Task
     ```
-    chicago-job
+    deloit-job
     ```
 1. Schedule Task
     ```
-    chicago-schedule
+    deloit-schedule
     ```
 
     
