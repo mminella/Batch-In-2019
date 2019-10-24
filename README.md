@@ -22,11 +22,11 @@ The repository for my talk titled the same
     ```
     Name: deloit-job
     Type: Task
-    URI: maven://com.github.mminella.Batch-in-2019:batch-job:7e8e45f7a78f6ee16bfb9fb350b1c74b2bb01b82
+    URI: maven://com.github.mminella.Batch-in-2019:batch-job:dd97f91aa8a05d106ae628f780e1f94057c2754f
     ```
 1. Create Task
     ```
-    deloit-job
+    deloit-task
     ```
 1. Schedule Task
     ```
