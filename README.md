@@ -22,7 +22,7 @@ The repository for my talk titled the same
     ```
     Name: deloit-job
     Type: Task
-    URI: maven://com.github.mminella.Batch-in-2019:batch-job:dd97f91aa8a05d106ae628f780e1f94057c2754f
+    URI: maven://com.github.mminella.Batch-in-2019:batch-job:8b81db0c150fb77f7bd91a3015022856dfcc0041
     ```
 1. Create Task
     ```
