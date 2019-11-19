@@ -20,17 +20,17 @@ The repository for my talk titled the same
     ```
 1. Register task application
     ```
-    Name: deloit-job
+    Name: nt-job
     Type: Task
     URI: maven://com.github.mminella.Batch-in-2019:batch-job:8b81db0c150fb77f7bd91a3015022856dfcc0041
     ```
 1. Create Task
     ```
-    deloit-task
+    nt-task
     ```
 1. Schedule Task
     ```
-    deloit-schedule
+    nt-schedule
     ```
 
     
