@@ -28,7 +28,6 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.support.ListItemReader;
-import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -54,19 +53,8 @@ public class JobConfiguration {
 	public Job job() {
 		return jobBuilderFactory.get("job")
 				.start(step1())
-				.next(step2())
 				.incrementer(new RunIdIncrementer())
 				.build();
-	}
-
-	@Bean
-	public Step step2() {
-		return this.stepBuilderFactory.get("step2")
-				.tasklet((stepContribution, chunkContext) -> {
-					System.out.println("Hello NT!");
-
-					return RepeatStatus.FINISHED;
-				}).build();
 	}
 
 	@Bean

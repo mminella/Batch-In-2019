@@ -22,7 +22,7 @@ The repository for my talk titled the same
     ```
     Name: nt-job
     Type: Task
-    URI: maven://com.github.mminella.Batch-in-2019:batch-job:8b81db0c150fb77f7bd91a3015022856dfcc0041
+    URI: maven://com.github.mminella.Batch-in-2019:batch-job:4af48de3e1cccc02109b8bda3dbbf12e3e2b8254
     ```
 1. Create Task
     ```
